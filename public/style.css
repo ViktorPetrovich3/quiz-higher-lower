@@ -1,0 +1,119 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e1e2f 0%, #2a2a40 100%);
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.card {
+  background: #2f2f46;
+  padding: 35px 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.badge {
+  background: #4caf50;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+h1 {
+  margin: 15px 0 10px;
+  font-size: 28px;
+}
+
+p {
+  color: #b0b0c8;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.comparison-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #232336;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+
+.item {
+  flex: 1;
+}
+
+.item h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.score {
+  color: #ffd54f;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0;
+}
+
+.vs {
+  background: #ff5252;
+  color: white;
+  font-weight: bold;
+  padding: 8px 10px;
+  border-radius: 50%;
+  font-size: 12px;
+  margin: 0 10px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.btn-higher {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-lower {
+  background: #f44336;
+  color: white;
+}

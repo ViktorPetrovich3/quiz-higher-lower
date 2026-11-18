@@ -1,35 +1,319 @@
 <!DOCTYPE html>
+<!-- Говорим браузеру, что это современная HTML-страница -->
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Выше или Ниже — Тестовая страница</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"> <!-- Кодировка: чтобы русские буквы читались правильно -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Адаптивность для телефонов -->
+  <title>Выше или ниже — викторина</title> <!-- Название вкладки браузера -->
+  <meta name="description" content="Угадай, у какого объекта значение больше. Короткие раунды, рекорды и таблица лидеров.">
+
+  <!-- Красивые шрифты с русскими буквами -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css"> <!-- Подключаем наши стили -->
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <span class="badge">Тестовый запуск</span>
-      <h1>Выше или Ниже?</h1>
-      <p>Угадай, какой запрос или тема популярнее. Сервер успешно отдает статические файлы!</p>
-      
-      <div class="comparison-box">
-        <div class="item">
-          <h3>Котики</h3>
-          <p class="score">1 250 000</p>
+
+  <!-- Фон: три размытых цветных пятна, которые плавают (двигает их CSS) -->
+  <div class="bg" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <!-- ШАПКА САЙТА -->
+  <header class="header">
+    <input type="checkbox" id="menu" class="menu-toggle"><!-- Невидимый переключатель меню на телефоне -->
+
+    <a href="#top" class="logo"><span class="logo__icon">⇅</span> Выше<span class="logo__or">или</span>ниже</a>
+
+    <nav class="nav">
+      <a href="#categories">Играть</a>
+      <a href="#rules">Правила</a>
+      <a href="#leaders">Рейтинг</a>
+    </nav>
+
+    <!-- Блок входа. Когда игрок авторизован, бэкендер заменит кнопку на имя и «Выйти» -->
+    <div class="auth-box">
+      <a href="#login" class="btn btn--main btn--small">Войти</a>
+    </div>
+
+    <label for="menu" class="burger" aria-label="Меню">☰</label><!-- Кнопка-«бургер», видна только на телефоне -->
+  </header>
+
+  <main id="top">
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero">
+      <div class="hero__text">
+        <p class="badge">🔥 Новая игра-викторина</p>
+        <h1>Угадай, что <span class="grad">больше</span></h1>
+        <p class="hero__lead">
+          Перед тобой две карточки. Выбери ту, у которой значение выше — население,
+          кассовые сборы, рейтинг. Угадал — играем дальше. Ошибся — игра окончена.
+          Сколько ответов подряд сможешь дать ты?
+        </p>
+        <div class="hero__btns">
+          <a href="#categories" class="btn btn--main">▶ Играть</a>
+          <a href="#rules" class="btn btn--ghost">Как играть</a>
         </div>
-        <div class="vs">VS</div>
-        <div class="item">
-          <h3>Собачки</h3>
-          <p class="score">???</p>
-        </div>
+        <!-- Числа «накручиваются» чистым CSS: число лежит в переменной --n -->
+        <ul class="stats">
+          <li><b style="--n:5"></b><span>категорий</span></li>
+          <li><b style="--n:75"></b><span>объектов</span></li>
+          <li><b style="--n:10"></b><span>мест в топе</span></li>
+        </ul>
       </div>
 
-      <div class="buttons">
-        <button class="btn btn-higher">Выше ▲</button>
-        <button class="btn btn-lower">Ниже ▼</button>
+      <!-- Две демо-карточки справа (просто красивая анимация) -->
+      <div class="duel" aria-hidden="true">
+        <div class="duel__card duel__card--a">
+          <span class="emoji">🇯🇵</span>
+          <h3>Япония</h3>
+          <p>Население</p>
+          <strong>125 млн</strong>
+        </div>
+        <div class="duel__vs">VS</div>
+        <div class="duel__card duel__card--b">
+          <span class="emoji">🇧🇷</span>
+          <h3>Бразилия</h3>
+          <p>Население</p>
+          <strong class="pulse">? млн</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- Бегущая строка (текст повторён 3 раза, чтобы лента была бесконечной) -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__line">
+        <span>🎬 Фильмы</span><span>⭐ Знаменитости</span><span>🌍 Страны</span><span>🎮 Видеоигры</span><span>🎵 Музыка</span>
+        <span>🎬 Фильмы</span><span>⭐ Знаменитости</span><span>🌍 Страны</span><span>🎮 Видеоигры</span><span>🎵 Музыка</span>
+        <span>🎬 Фильмы</span><span>⭐ Знаменитости</span><span>🌍 Страны</span><span>🎮 Видеоигры</span><span>🎵 Музыка</span>
       </div>
     </div>
+
+    <!-- КАТЕГОРИИ -->
+    <section class="section" id="categories">
+      <h2 class="reveal">Выбери категорию</h2>
+      <p class="section__sub reveal">Твой личный рекорд виден прямо на карточке.</p>
+      <div class="cats">
+        <a class="cat" href="game.html?category=films" style="--clr:#7c5cff"><!-- Карточка-ссылка на игру этой категории; --clr — её цвет -->
+          <span class="cat__emoji">🎬</span>
+          <h3>Фильмы</h3>
+          <p>Какой фильм собрал больше в прокате?</p>
+          <div class="cat__rec"><span>Рекорд</span><b>0</b></div><!-- Бэкендер подставит настоящий рекорд -->
+          <div class="cat__go">Играть <span>→</span></div>
+        </a>
+        <a class="cat" href="game.html?category=stars" style="--clr:#ff4fa3">
+          <span class="cat__emoji">⭐</span>
+          <h3>Знаменитости</h3>
+          <p>У кого больше подписчиков?</p>
+          <div class="cat__rec"><span>Рекорд</span><b>0</b></div>
+          <div class="cat__go">Играть <span>→</span></div>
+        </a>
+        <a class="cat" href="game.html?category=country" style="--clr:#22d3ee">
+          <span class="cat__emoji">🌍</span>
+          <h3>Страны</h3>
+          <p>В какой стране живёт больше людей?</p>
+          <div class="cat__rec"><span>Рекорд</span><b>0</b></div>
+          <div class="cat__go">Играть <span>→</span></div>
+        </a>
+        <a class="cat" href="game.html?category=games" style="--clr:#34d399">
+          <span class="cat__emoji">🎮</span>
+          <h3>Видеоигры</h3>
+          <p>Какая игра продалась лучше?</p>
+          <div class="cat__rec"><span>Рекорд</span><b>0</b></div>
+          <div class="cat__go">Играть <span>→</span></div>
+        </a>
+        <a class="cat" href="game.html?category=music" style="--clr:#fbbf24">
+          <span class="cat__emoji">🎵</span>
+          <h3>Музыка</h3>
+          <p>У какого трека больше прослушиваний?</p>
+          <div class="cat__rec"><span>Рекорд</span><b>0</b></div>
+          <div class="cat__go">Играть <span>→</span></div>
+        </a>
+      </div>
+      <p class="note reveal">Ты играешь как гость — рекорд хранится только в этом браузере. <a href="#register">Зарегистрируйся</a>, чтобы сохранить прогресс.</p>
+    </section>
+
+    <!-- ПРАВИЛА -->
+    <section class="section" id="rules">
+      <h2 class="reveal">Правила игры</h2>
+      <div class="rules">
+        <article class="rule reveal"><span class="rule__n">1</span><h3>Выбери категорию</h3><p>Фильмы, страны, музыка и другие. В каждой — не меньше 15 объектов.</p></article>
+        <article class="rule reveal"><span class="rule__n">2</span><h3>Сравни две карточки</h3><p>У каждой есть название и картинка. Нажми на ту, у которой значение больше.</p></article>
+        <article class="rule reveal"><span class="rule__n">3</span><h3>Угадал — продолжай</h3><p>Значение раскрывается, счёт растёт на 1. Выбранная карточка остаётся, вторая меняется на новую.</p></article>
+        <article class="rule reveal"><span class="rule__n">4</span><h3>Ошибся — конец</h3><p>Увидишь счёт и рекорд. Можно сыграть снова, выбрать другую категорию или вернуться в меню.</p></article>
+      </div>
+    </section>
+
+    <!-- ТАБЛИЦА ЛИДЕРОВ. Вкладки работают на радио-кнопках: выбрал вкладку — CSS показал нужную таблицу -->
+    <section class="section lb" id="leaders">
+      <h2 class="reveal">Таблица лидеров</h2>
+      <p class="section__sub reveal">Топ-10 игроков по каждой категории.</p>
+
+      <!-- Невидимые радио-кнопки (по одной на категорию) -->
+      <input type="radio" name="lb" id="lb-films" class="lb-radio" checked>
+      <input type="radio" name="lb" id="lb-stars" class="lb-radio">
+      <input type="radio" name="lb" id="lb-country" class="lb-radio">
+      <input type="radio" name="lb" id="lb-games" class="lb-radio">
+      <input type="radio" name="lb" id="lb-music" class="lb-radio">
+
+      <div class="tabs">
+        <label for="lb-films">🎬 Фильмы</label>
+        <label for="lb-stars">⭐ Знаменитости</label>
+        <label for="lb-country">🌍 Страны</label>
+        <label for="lb-games">🎮 Видеоигры</label>
+        <label for="lb-music">🎵 Музыка</label>
+      </div>
+
+      <div class="boards">
+        <div class="board board--films"><!-- Таблица категории «Фильмы» -->
+          <table>
+            <thead><tr><th>#</th><th>Игрок</th><th>Рекорд</th></tr></thead>
+            <tbody>
+            <tr><td>🥇</td><td>Nika</td><td>30</td></tr>
+            <tr><td>🥈</td><td>Artem</td><td>28</td></tr>
+            <tr><td>🥉</td><td>Sonya</td><td>26</td></tr>
+            <tr><td>4</td><td>Max</td><td>24</td></tr>
+            <tr><td>5</td><td>Alina</td><td>22</td></tr>
+            <tr><td>6</td><td>Dima</td><td>20</td></tr>
+            <tr><td>7</td><td>Vlad</td><td>18</td></tr>
+            <tr><td>8</td><td>Katya</td><td>16</td></tr>
+            <tr><td>9</td><td>Ilya</td><td>14</td></tr>
+            <tr><td>10</td><td>Lera</td><td>12</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="board board--stars"><!-- Таблица категории «Знаменитости» -->
+          <table>
+            <thead><tr><th>#</th><th>Игрок</th><th>Рекорд</th></tr></thead>
+            <tbody>
+            <tr><td>🥇</td><td>Nika</td><td>29</td></tr>
+            <tr><td>🥈</td><td>Artem</td><td>27</td></tr>
+            <tr><td>🥉</td><td>Sonya</td><td>25</td></tr>
+            <tr><td>4</td><td>Max</td><td>23</td></tr>
+            <tr><td>5</td><td>Alina</td><td>21</td></tr>
+            <tr><td>6</td><td>Dima</td><td>19</td></tr>
+            <tr><td>7</td><td>Vlad</td><td>17</td></tr>
+            <tr><td>8</td><td>Katya</td><td>15</td></tr>
+            <tr><td>9</td><td>Ilya</td><td>13</td></tr>
+            <tr><td>10</td><td>Lera</td><td>11</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="board board--country"><!-- Таблица категории «Страны» -->
+          <table>
+            <thead><tr><th>#</th><th>Игрок</th><th>Рекорд</th></tr></thead>
+            <tbody>
+            <tr><td>🥇</td><td>Nika</td><td>28</td></tr>
+            <tr><td>🥈</td><td>Artem</td><td>26</td></tr>
+            <tr><td>🥉</td><td>Sonya</td><td>24</td></tr>
+            <tr><td>4</td><td>Max</td><td>22</td></tr>
+            <tr><td>5</td><td>Alina</td><td>20</td></tr>
+            <tr><td>6</td><td>Dima</td><td>18</td></tr>
+            <tr><td>7</td><td>Vlad</td><td>16</td></tr>
+            <tr><td>8</td><td>Katya</td><td>14</td></tr>
+            <tr><td>9</td><td>Ilya</td><td>12</td></tr>
+            <tr><td>10</td><td>Lera</td><td>10</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="board board--games"><!-- Таблица категории «Видеоигры» -->
+          <table>
+            <thead><tr><th>#</th><th>Игрок</th><th>Рекорд</th></tr></thead>
+            <tbody>
+            <tr><td>🥇</td><td>Nika</td><td>27</td></tr>
+            <tr><td>🥈</td><td>Artem</td><td>25</td></tr>
+            <tr><td>🥉</td><td>Sonya</td><td>23</td></tr>
+            <tr><td>4</td><td>Max</td><td>21</td></tr>
+            <tr><td>5</td><td>Alina</td><td>19</td></tr>
+            <tr><td>6</td><td>Dima</td><td>17</td></tr>
+            <tr><td>7</td><td>Vlad</td><td>15</td></tr>
+            <tr><td>8</td><td>Katya</td><td>13</td></tr>
+            <tr><td>9</td><td>Ilya</td><td>11</td></tr>
+            <tr><td>10</td><td>Lera</td><td>9</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="board board--music"><!-- Таблица категории «Музыка» -->
+          <table>
+            <thead><tr><th>#</th><th>Игрок</th><th>Рекорд</th></tr></thead>
+            <tbody>
+            <tr><td>🥇</td><td>Nika</td><td>26</td></tr>
+            <tr><td>🥈</td><td>Artem</td><td>24</td></tr>
+            <tr><td>🥉</td><td>Sonya</td><td>22</td></tr>
+            <tr><td>4</td><td>Max</td><td>20</td></tr>
+            <tr><td>5</td><td>Alina</td><td>18</td></tr>
+            <tr><td>6</td><td>Dima</td><td>16</td></tr>
+            <tr><td>7</td><td>Vlad</td><td>14</td></tr>
+            <tr><td>8</td><td>Katya</td><td>12</td></tr>
+            <tr><td>9</td><td>Ilya</td><td>10</td></tr>
+            <tr><td>10</td><td>Lera</td><td>8</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="note">Хочешь попасть в таблицу? <a href="#login">Войди</a> или <a href="#register">зарегистрируйся</a>. (Имена и цифры в таблице — временные, для примера.)</p>
+    </section>
+
+    <!-- ПРИЗЫВ ЗАРЕГИСТРИРОВАТЬСЯ -->
+    <section class="section cta reveal">
+      <h2>Хочешь в таблицу лидеров?</h2>
+      <p>Зарегистрируйся — рекорды и история игр сохранятся на сервере, и ты сможешь играть с любого устройства.</p>
+      <a href="#register" class="btn btn--main">Создать аккаунт</a>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 «Выше или ниже» · Учебный проект · Команда ПО-2408</footer>
+
+  <!-- ОКНО ВХОДА. Открывается, когда в адресе стоит #login (ссылка href="#login") -->
+  <div class="modal" id="login">
+    <a href="#top" class="modal__bg" aria-label="Закрыть"></a><!-- Тёмный фон: клик по нему закрывает окно -->
+    <div class="modal__box">
+      <a href="#top" class="modal__close" aria-label="Закрыть">✕</a>
+      <div class="modal__tabs">
+        <a href="#login" class="is-active">Вход</a>
+        <a href="#register">Регистрация</a>
+      </div>
+      <!-- action="#" — временно. Бэкендер вставит сюда адрес обработчика, например action="api/login.php" -->
+      <form action="#" method="post">
+        <label>Логин
+          <input type="text" name="login" autocomplete="username" required minlength="3" maxlength="20"
+                 pattern="[A-Za-z0-9_]{3,20}" title="3–20 символов: латиница, цифры и _" placeholder="например, player_1">
+        </label>
+        <label>Пароль
+          <input type="password" name="password" autocomplete="current-password" required minlength="6" placeholder="минимум 6 символов">
+        </label>
+        <p class="form-error"><!-- Сюда сервер выведет «Проверьте логин и пароль» --></p>
+        <button type="submit" class="btn btn--main btn--full">Войти</button>
+      </form>
+    </div>
   </div>
+
+  <!-- ОКНО РЕГИСТРАЦИИ (открывается по #register) -->
+  <div class="modal" id="register">
+    <a href="#top" class="modal__bg" aria-label="Закрыть"></a>
+    <div class="modal__box">
+      <a href="#top" class="modal__close" aria-label="Закрыть">✕</a>
+      <div class="modal__tabs">
+        <a href="#login">Вход</a>
+        <a href="#register" class="is-active">Регистрация</a>
+      </div>
+      <form action="#" method="post">
+        <label>Логин
+          <input type="text" name="login" autocomplete="username" required minlength="3" maxlength="20"
+                 pattern="[A-Za-z0-9_]{3,20}" title="3–20 символов: латиница, цифры и _" placeholder="например, player_1">
+        </label>
+        <label>Пароль
+          <input type="password" name="password" autocomplete="new-password" required minlength="6" placeholder="минимум 6 символов">
+        </label>
+        <label>Повтори пароль
+          <input type="password" name="password2" autocomplete="new-password" required minlength="6" placeholder="ещё раз пароль">
+        </label>
+        <p class="form-error"></p>
+        <button type="submit" class="btn btn--main btn--full">Создать аккаунт</button>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>

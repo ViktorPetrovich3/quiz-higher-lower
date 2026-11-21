@@ -1,0 +1,669 @@
+
+/* =========================================================
+   ИГРОВОЙ ЭКРАН «ВЫШЕ ИЛИ НИЖЕ»
+   Общие цвета и шрифты берутся из style.css
+   ========================================================= */
+
+
+/* =========================================================
+   ОБЩАЯ СТРУКТУРА СТРАНИЦЫ
+   ========================================================= */
+
+.game-page {
+  min-height: 100vh;
+  min-height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-x: hidden;
+}
+
+/* Основная часть занимает свободное место */
+.game-main {
+  width: min(1120px, 100%);
+
+  margin: 0 auto;
+  padding: 42px 5vw 34px;
+
+  flex: 1 0 auto;
+}
+
+
+/* =========================================================
+   ШАПКА
+   ========================================================= */
+
+.game-header {
+  width: 100%;
+  min-height: 66px;
+}
+
+.game-header__right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.game-category {
+  padding: 8px 14px;
+
+  border: 1px solid var(--line);
+  border-radius: 999px;
+
+  background: var(--glass);
+  color: var(--muted);
+
+  font-size: .92rem;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   НАЗВАНИЕ ИГРЫ
+   ========================================================= */
+
+.game-intro {
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+.game-intro h1 {
+  margin-bottom: 12px;
+
+  font-size: clamp(2rem, 5vw, 3.3rem);
+}
+
+.game-intro__text {
+  max-width: 620px;
+
+  margin: 0 auto;
+
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+
+/* =========================================================
+   СЧЁТ И РЕКОРД
+   ========================================================= */
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+
+  margin: 0 auto 34px;
+}
+
+.score-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-width: 220px;
+
+  padding: 13px 20px;
+
+  border: 1px solid var(--line);
+  border-radius: 18px;
+
+  background: var(--glass);
+
+  backdrop-filter: blur(12px);
+}
+
+.score-box__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.score-box__label,
+.score-box__hint {
+  display: block;
+
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.score-box__value {
+  margin-left: auto;
+
+  font-family: 'Unbounded', sans-serif;
+  font-size: 1.55rem;
+
+  white-space: nowrap;
+}
+
+.score-box--current .score-box__value {
+  color: var(--b);
+}
+
+.score-box--record .score-box__value {
+  color: var(--c);
+}
+
+
+/* =========================================================
+   БЛОК СРАВНЕНИЯ
+   ========================================================= */
+
+.round {
+  padding: clamp(18px, 3vw, 30px);
+
+  border: 1px solid var(--line);
+  border-radius: 30px;
+
+  background: rgba(255, 255, 255, .035);
+
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .25);
+
+  backdrop-filter: blur(12px);
+}
+
+.round__heading {
+  margin-bottom: 26px;
+  text-align: center;
+}
+
+.round__eyebrow {
+  color: var(--b);
+
+  font-size: .72rem;
+  font-weight: 800;
+
+  letter-spacing: .16em;
+}
+
+.round__heading h2 {
+  margin: 8px 0 6px;
+
+  font-size: clamp(1.25rem, 3vw, 1.85rem);
+}
+
+.round__heading p {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+
+/* =========================================================
+   СЕТКА КАРТОЧЕК
+   ========================================================= */
+
+.comparison {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    58px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: clamp(10px, 2vw, 22px);
+}
+
+
+/* =========================================================
+   КАРТОЧКИ
+   ========================================================= */
+
+.movie-card {
+  --card-accent: var(--a);
+
+  display: block;
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid var(--line);
+  border-radius: 22px;
+
+  background: rgba(255, 255, 255, .055);
+
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .24);
+
+  /* Плавная анимация */
+  transition:
+    transform .3s ease,
+    border-color .3s ease,
+    background-color .3s ease,
+    box-shadow .3s ease;
+}
+
+.movie-card--right {
+  --card-accent: var(--c);
+}
+
+
+/* Левая карточка поднимается вверх */
+
+.movie-card--left:hover {
+  transform: translateY(-5px);
+}
+
+
+/* Правая карточка опускается вниз */
+
+.movie-card--right:hover {
+  transform: translateY(5px);
+}
+
+
+/* =========================================================
+   ИЗОБРАЖЕНИЯ
+   ========================================================= */
+
+.movie-card__image-wrap {
+  position: relative;
+
+  height: clamp(190px, 27vw, 300px);
+
+  overflow: hidden;
+
+  background: #211b43;
+}
+
+.movie-card__image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform .5s ease;
+}
+
+/* Увеличение изображения при наведении */
+
+.movie-card:hover .movie-card__image {
+  transform: scale(1.045);
+}
+
+
+/* Метка категории */
+
+.movie-card__tag {
+  position: absolute;
+
+  left: 14px;
+  bottom: 14px;
+
+  padding: 6px 12px;
+
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 999px;
+
+  background: rgba(11, 8, 32, .72);
+
+  color: #fff;
+
+  font-size: .72rem;
+  font-weight: 700;
+
+  backdrop-filter: blur(8px);
+}
+
+
+/* =========================================================
+   ТЕКСТ В КАРТОЧКАХ
+   ========================================================= */
+
+.movie-card__body {
+  padding: 18px 20px 20px;
+}
+
+.movie-card__body h3 {
+  margin-bottom: 5px;
+
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+.movie-card__meta {
+  min-height: 24px;
+
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.movie-card__value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 17px;
+  padding-top: 14px;
+
+  border-top: 1px solid var(--line);
+
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.movie-card__value strong {
+  color: var(--b);
+
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(.85rem, 2vw, 1.05rem);
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   МЕТКИ ПРАВИЛЬНОГО И НЕПРАВИЛЬНОГО ОТВЕТА
+   ========================================================= */
+
+.movie-card__status {
+  position: absolute;
+
+  top: 14px;
+  right: 14px;
+
+  z-index: 2;
+
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  color: #fff;
+
+  font-size: .75rem;
+  font-weight: 800;
+
+  backdrop-filter: blur(10px);
+}
+
+
+/* ПРАВИЛЬНЫЙ ОТВЕТ — ЗЕЛЁНЫЙ */
+
+.movie-card.correct {
+  border: 1px solid #34d399;
+
+  background: rgba(16, 185, 129, .09);
+
+  box-shadow:
+    0 0 0 1px rgba(52, 211, 153, .22),
+    0 16px 42px rgba(16, 185, 129, .14);
+}
+
+.movie-card.correct .movie-card__status {
+  background: rgba(6, 95, 70, .9);
+
+  border: 1px solid #34d399;
+}
+
+.movie-card.correct .movie-card__value strong {
+  color: #6ee7b7;
+}
+
+
+/* НЕПРАВИЛЬНЫЙ ОТВЕТ — КРАСНЫЙ */
+
+.movie-card.incorrect {
+  border: 1px solid #f87171;
+
+  background: rgba(239, 68, 68, .08);
+
+  box-shadow:
+    0 0 0 1px rgba(248, 113, 113, .2),
+    0 16px 42px rgba(239, 68, 68, .13);
+}
+
+.movie-card.incorrect .movie-card__status {
+  background: rgba(127, 29, 29, .9);
+
+  border: 1px solid #f87171;
+}
+
+.movie-card.incorrect .movie-card__value strong {
+  color: #fca5a5;
+}
+
+
+/* =========================================================
+   РАЗДЕЛИТЕЛЬ VS
+   ========================================================= */
+
+.versus {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  place-items: center;
+
+  width: 58px;
+  height: 58px;
+
+  border: 4px solid var(--bg);
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, var(--c), var(--a));
+
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 8px 25px rgba(124, 92, 255, .35);
+
+  font-family: 'Unbounded', sans-serif;
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   ПОЯСНЕНИЕ ПОД КАРТОЧКАМИ
+   ========================================================= */
+
+.round__note {
+  max-width: 650px;
+
+  margin: 22px auto 0;
+
+  color: var(--muted);
+  font-size: .8rem;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.game-footer {
+  width: 100%;
+
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+
+/* =========================================================
+   АДАПТИВНОСТЬ — ПЛАНШЕТЫ
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .game-main {
+    padding-top: 30px;
+  }
+
+  .game-header {
+    padding-inline: 4vw;
+  }
+
+  .game-header__right {
+    gap: 8px;
+  }
+
+  .game-category {
+    display: none;
+  }
+
+  .scoreboard {
+    gap: 10px;
+  }
+
+  .score-box {
+    flex: 1;
+    min-width: 0;
+
+    gap: 7px;
+
+    padding: 12px;
+  }
+
+  .score-box__value {
+    font-size: 1.25rem;
+  }
+
+  .score-box__hint {
+    display: none;
+  }
+
+  .comparison {
+    grid-template-columns:
+      minmax(0, 1fr)
+      40px
+      minmax(0, 1fr);
+
+    gap: 7px;
+  }
+
+  .versus {
+    width: 44px;
+    height: 44px;
+
+    font-size: .65rem;
+
+    border-width: 3px;
+  }
+
+  .movie-card {
+    border-radius: 16px;
+  }
+
+  .movie-card__image-wrap {
+    height: 190px;
+  }
+
+  .movie-card__body {
+    padding: 13px 12px 15px;
+  }
+
+  .movie-card__meta {
+    min-height: 40px;
+    font-size: .72rem;
+  }
+
+  .movie-card__value {
+    display: block;
+
+    margin-top: 12px;
+
+    font-size: .7rem;
+  }
+
+  .movie-card__value strong {
+    display: block;
+    margin-top: 7px;
+  }
+
+}
+
+
+/* =========================================================
+   АДАПТИВНОСТЬ — ТЕЛЕФОНЫ
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .game-main {
+    padding-inline: 12px;
+  }
+
+  .round {
+    padding: 14px 10px 18px;
+
+    border-radius: 22px;
+  }
+
+  .comparison {
+    grid-template-columns:
+      minmax(0, 1fr)
+      34px
+      minmax(0, 1fr);
+
+    gap: 4px;
+  }
+
+  .versus {
+    width: 38px;
+    height: 38px;
+
+    font-size: .58rem;
+  }
+
+  .movie-card__image-wrap {
+    height: 150px;
+  }
+
+  .movie-card__body h3 {
+    font-size: .9rem;
+  }
+
+  .movie-card__meta {
+    font-size: .66rem;
+  }
+
+  .movie-card__value strong {
+    font-size: .78rem;
+  }
+
+  .movie-card__status {
+    top: 8px;
+    right: 8px;
+
+    padding: 5px 8px;
+
+    font-size: .65rem;
+  }
+
+  .game-header .logo {
+    font-size: .78rem;
+  }
+
+  .game-header .btn {
+    padding: 8px 12px;
+    font-size: .75rem;
+  }
+
+  .game-footer {
+    padding-inline: 12px;
+    font-size: .78rem;
+  }
+
+}
+
+
+/* =========================================================
+   ДОСТУПНОСТЬ — УМЕНЬШЕНИЕ АНИМАЦИИ
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .movie-card,
+  .movie-card__image {
+    transition: none;
+  }
+
+  .movie-card--left:hover,
+  .movie-card--right:hover {
+    transform: none;
+  }
+
+}

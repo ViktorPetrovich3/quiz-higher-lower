@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="description"
+    content="Игра «Выше или ниже»: сравни две карточки и выбери правильный ответ."
+  >
+
+  <title>Выше или ниже — игровой раунд</title>
+
+  <!-- Подключение шрифтов -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Общие стили проекта -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Стили игрового экрана -->
+  <link rel="stylesheet" href="game.css">
+</head>
+
+<body class="game-page">
+
+  <!-- Декоративный фон -->
+  <div class="bg" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Шапка сайта -->
+  <header class="header game-header">
+
+    <a
+      href="index.html"
+      class="logo"
+      aria-label="Выше или ниже — главная страница"
+    >
+      <span class="logo__icon">⇅</span>
+      Выше<span class="logo__or">или</span>ниже
+    </a>
+
+    <div class="game-header__right">
+
+      <span class="game-category">
+        🎬 Фильмы
+      </span>
+
+      <a
+        href="index.html#categories"
+        class="btn btn--ghost btn--small"
+      >
+        Главное меню
+      </a>
+
+    </div>
+
+  </header>
+
+  <!-- Основное содержимое -->
+  <main class="game-main">
+
+    <!-- Название игры -->
+    <section class="game-intro" aria-labelledby="game-title">
+
+      <h1 id="game-title">
+        Выше <span class="grad">или ниже</span>
+      </h1>
+
+      <p class="game-intro__text">
+        Сравни две карточки и выбери ту, у которой значение больше.
+      </p>
+
+    </section>
+
+    <!-- Счёт и рекорд -->
+    <section class="scoreboard" aria-label="Статистика игрока">
+
+      <article class="score-box score-box--current">
+
+        <div class="score-box__text">
+          <span class="score-box__label">
+            Твой счёт
+          </span>
+
+          <span class="score-box__hint">
+            ответов подряд
+          </span>
+        </div>
+
+        <strong class="score-box__value">
+          12
+        </strong>
+
+      </article>
+
+      <article class="score-box score-box--record">
+
+        <div class="score-box__text">
+          <span class="score-box__label">
+            Личный рекорд
+          </span>
+
+          <span class="score-box__hint">
+            лучший результат
+          </span>
+        </div>
+
+        <strong class="score-box__value">
+          1&nbsp;028
+        </strong>
+
+      </article>
+
+    </section>
+
+    <!-- Игровой раунд -->
+    <section class="round" aria-labelledby="question-title">
+
+      <div class="round__heading">
+
+        <span class="round__eyebrow">
+          ТЕКУЩЕЕ СРАВНЕНИЕ
+        </span>
+
+        <h2 id="question-title">
+          У какого фильма сборы
+          <span class="grad">выше?</span>
+        </h2>
+
+        <p>
+          Ниже показан пример правильного и неправильного выбора
+        </p>
+
+      </div>
+
+      <!-- Карточки сравнения -->
+      <div class="comparison">
+
+        <!-- Левая карточка: правильный ответ -->
+        <article
+          class="movie-card movie-card--left correct"
+          aria-label="Аватар — правильный ответ"
+        >
+
+          <div class="movie-card__image-wrap">
+
+            <img
+              src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=900&q=85"
+              alt="Кинозал с большим экраном"
+              class="movie-card__image"
+            >
+
+            <span class="movie-card__tag">
+              Фильм
+            </span>
+
+            <span class="movie-card__status">
+              ✓ Верно
+            </span>
+
+          </div>
+
+          <div class="movie-card__body">
+
+            <h3>
+              Аватар
+            </h3>
+
+            <p class="movie-card__meta">
+              2009 · Фантастика, приключения
+            </p>
+
+            <div class="movie-card__value">
+
+              <span>
+                Мировые сборы
+              </span>
+
+              <strong>
+                2,92&nbsp;млрд&nbsp;$
+              </strong>
+
+            </div>
+
+          </div>
+
+        </article>
+
+        <!-- Разделитель -->
+        <div class="versus" aria-hidden="true">
+          <span>VS</span>
+        </div>
+
+        <!-- Правая карточка: неправильный ответ -->
+        <article
+          class="movie-card movie-card--right incorrect"
+          aria-label="Мстители: Финал — неправильный ответ"
+        >
+
+          <div class="movie-card__image-wrap">
+
+            <img
+              src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=85"
+              alt="Кинозал с рядами кресел"
+              class="movie-card__image"
+            >
+
+            <span class="movie-card__tag">
+              Фильм
+            </span>
+
+            <span class="movie-card__status">
+              ✕ Неверно
+            </span>
+
+          </div>
+
+          <div class="movie-card__body">
+
+            <h3>
+              Мстители: Финал
+            </h3>
+
+            <p class="movie-card__meta">
+              2019 · Фантастика, боевик
+            </p>
+
+            <div class="movie-card__value">
+
+              <span>
+                Мировые сборы
+              </span>
+
+              <strong>
+                2,80&nbsp;млрд&nbsp;$
+              </strong>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+      <!-- Пояснение -->
+      <p class="round__note">
+        Это демонстрация правильного и неправильного ответа.
+        Игровая логика и изменение счёта подключаются отдельно.
+      </p>
+
+    </section>
+
+  </main>
+
+  <!-- Подвал -->
+  <footer class="footer game-footer">
+    © 2026 «Выше или ниже» · Учебный проект · Команда ПО-2408
+  </footer>
+
+</body>
+</html>

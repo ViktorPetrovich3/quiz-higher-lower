@@ -263,6 +263,9 @@
   overflow: hidden;
 
   background: #211b43;
+
+  /* Курсор-рука: на картинку можно нажать */
+  cursor: pointer;
 }
 
 .movie-card__image {
@@ -355,28 +358,8 @@
 
 
 /* =========================================================
-   МЕТКИ ПРАВИЛЬНОГО И НЕПРАВИЛЬНОГО ОТВЕТА
+   ПОДСВЕТКА ПОСЛЕ НАЖАТИЯ (класс добавляет скрипт)
    ========================================================= */
-
-.movie-card__status {
-  position: absolute;
-
-  top: 14px;
-  right: 14px;
-
-  z-index: 2;
-
-  padding: 7px 12px;
-
-  border-radius: 999px;
-
-  color: #fff;
-
-  font-size: .75rem;
-  font-weight: 800;
-
-  backdrop-filter: blur(10px);
-}
 
 
 /* ПРАВИЛЬНЫЙ ОТВЕТ — ЗЕЛЁНЫЙ */
@@ -389,12 +372,6 @@
   box-shadow:
     0 0 0 1px rgba(52, 211, 153, .22),
     0 16px 42px rgba(16, 185, 129, .14);
-}
-
-.movie-card.correct .movie-card__status {
-  background: rgba(6, 95, 70, .9);
-
-  border: 1px solid #34d399;
 }
 
 .movie-card.correct .movie-card__value strong {
@@ -412,12 +389,6 @@
   box-shadow:
     0 0 0 1px rgba(248, 113, 113, .2),
     0 16px 42px rgba(239, 68, 68, .13);
-}
-
-.movie-card.incorrect .movie-card__status {
-  background: rgba(127, 29, 29, .9);
-
-  border: 1px solid #f87171;
 }
 
 .movie-card.incorrect .movie-card__value strong {
@@ -439,14 +410,11 @@
   width: 58px;
   height: 58px;
 
-  border: 4px solid var(--bg);
   border-radius: 50%;
 
   background: linear-gradient(135deg, var(--c), var(--a));
 
-  box-shadow:
-    0 0 0 1px var(--line),
-    0 8px 25px rgba(124, 92, 255, .35);
+  box-shadow: 0 8px 25px rgba(124, 92, 255, .35);
 
   font-family: 'Unbounded', sans-serif;
   font-size: .78rem;
@@ -539,8 +507,6 @@
     height: 44px;
 
     font-size: .65rem;
-
-    border-width: 3px;
   }
 
   .movie-card {
@@ -622,15 +588,6 @@
 
   .movie-card__value strong {
     font-size: .78rem;
-  }
-
-  .movie-card__status {
-    top: 8px;
-    right: 8px;
-
-    padding: 5px 8px;
-
-    font-size: .65rem;
   }
 
   .game-header .logo {

@@ -73,7 +73,7 @@
     <section class="game-intro" aria-labelledby="game-title">
 
       <h1 id="game-title">
-        Выше <span class="grad">или ниже</span>
+        Выше <span class="grad">или</span> ниже
       </h1>
 
       <p class="game-intro__text">
@@ -146,10 +146,11 @@
       <!-- Карточки сравнения -->
       <div class="comparison">
 
-        <!-- Левая карточка: правильный ответ -->
+        <!-- Левая карточка (правильный ответ) -->
         <article
-          class="movie-card movie-card--left correct"
-          aria-label="Аватар — правильный ответ"
+          class="movie-card movie-card--left"
+          data-correct="true"
+          aria-label="Аватар"
         >
 
           <div class="movie-card__image-wrap">
@@ -162,10 +163,6 @@
 
             <span class="movie-card__tag">
               Фильм
-            </span>
-
-            <span class="movie-card__status">
-              ✓ Верно
             </span>
 
           </div>
@@ -201,10 +198,11 @@
           <span>VS</span>
         </div>
 
-        <!-- Правая карточка: неправильный ответ -->
+        <!-- Правая карточка (неправильный ответ) -->
         <article
-          class="movie-card movie-card--right incorrect"
-          aria-label="Мстители: Финал — неправильный ответ"
+          class="movie-card movie-card--right"
+          data-correct="false"
+          aria-label="Мстители: Финал"
         >
 
           <div class="movie-card__image-wrap">
@@ -217,10 +215,6 @@
 
             <span class="movie-card__tag">
               Фильм
-            </span>
-
-            <span class="movie-card__status">
-              ✕ Неверно
             </span>
 
           </div>
@@ -267,6 +261,44 @@
   <footer class="footer game-footer">
     © 2026 «Выше или ниже» · Учебный проект · Команда ПО-2408
   </footer>
+
+  <script>
+    // Находим все карточки фильмов на странице
+    const cards = document.querySelectorAll('.movie-card');
+
+    // Запоминаем, дан ли уже ответ (пока нет)
+    let answered = false;
+
+    // Делаем одно и то же для каждой карточки
+    cards.forEach(function (card) {
+
+      // Находим в карточке блок с картинкой
+      const imageWrap = card.querySelector('.movie-card__image-wrap');
+
+      // Когда нажимают на картинку, выполняется код ниже
+      imageWrap.addEventListener('click', function () {
+
+        // Если ответ уже дан, выходим и ничего не делаем
+        if (answered) {
+          return;
+        }
+
+        // Запоминаем, что ответ дан
+        answered = true;
+
+        // Смотрим пометку data-correct у нажатой карточки
+        if (card.dataset.correct === 'true') {
+          // Карточка правильная: зелёная подсветка
+          card.classList.add('correct');
+        } else {
+          // Карточка неправильная: красная подсветка
+          card.classList.add('incorrect');
+        }
+
+      });
+
+    });
+  </script>
 
 </body>
 </html>

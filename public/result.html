@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Выше или ниже — результат</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="game.css">
+  <link rel="stylesheet" href="result.css">
+</head>
+
+<body class="game-page">
+
+  <div class="bg">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <header class="header game-header">
+
+    <a href="index.html" class="logo">
+      <span class="logo__icon">⇅</span>
+      Выше<span class="logo__or">или</span>ниже
+    </a>
+
+    <div class="game-header__right">
+      <span class="game-category">🎬 Фильмы</span>
+      <a href="index.html#categories" class="btn btn--ghost btn--small">Главное меню</a>
+    </div>
+
+  </header>
+
+  <main class="game-main">
+
+    <section class="result">
+
+      <div class="result__icon">🏆</div>
+
+      <span class="result__eyebrow">ИГРА ОКОНЧЕНА</span>
+
+      <h1>Отличный <span class="grad">результат!</span></h1>
+
+      <p class="result__text">
+        Сыграй ещё раз и попробуй побить свой рекорд.
+      </p>
+
+      <div class="scoreboard">
+
+        <div class="score-box score-box--current">
+          <div class="score-box__text">
+            <span class="score-box__label">Твой счёт</span>
+          </div>
+          <strong class="score-box__value">12</strong>
+        </div>
+
+        <div class="score-box score-box--record">
+          <div class="score-box__text">
+            <span class="score-box__label">Личный рекорд</span>
+          </div>
+          <strong class="score-box__value">1&nbsp;028</strong>
+        </div>
+
+      </div>
+
+      <div class="result__actions">
+        <a href="game.html" class="btn result__play">Играть снова</a>
+        <a href="index.html#leaders" class="btn btn--ghost">Таблица лидеров</a>
+        <a href="index.html#categories" class="btn btn--ghost">Сменить категорию</a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="footer game-footer">
+    © 2026 «Выше или ниже» · Учебный проект · Команда ПО-2408
+  </footer>
+
+</body>
+</html>

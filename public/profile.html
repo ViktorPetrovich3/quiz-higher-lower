@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Личный кабинет — Выше или ниже</title>
+  <meta name="description" content="Профиль игрока, рекорды по категориям и настройки.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body class="profile-page">
+
+  <div class="bg" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <header class="header">
+    <input type="checkbox" id="menu" class="menu-toggle">
+
+    <a href="index.html" class="logo">
+      <span class="logo__icon">⇅</span>
+      Выше<span class="logo__or">или</span>ниже
+    </a>
+
+    <nav class="nav">
+      <a href="index.html#categories">Категории</a>
+      <a href="index.html#rules">Правила</a>
+      <a href="index.html#leaders">Рейтинг</a>
+      <a href="#records">Рекорды</a>
+    </nav>
+
+    <div class="auth-box">
+      <span class="user"><i>P1</i> player_1</span>
+      <a href="index.html" class="btn btn--ghost btn--small">Главное меню</a>
+    </div>
+
+    <label for="menu" class="burger" aria-label="Меню">☰</label>
+  </header>
+
+  <main class="profile-main">
+
+    <!-- Карточка игрока и общие показатели -->
+    <section class="profile-hero" aria-labelledby="profile-title">
+      <div class="profile-identity">
+        <div class="avatar" id="avatarBadge" style="--clr:#7c5cff">⚡</div>
+        <div>
+          <span class="profile-tag">ПРОФИЛЬ ИГРОКА</span>
+          <h1 id="profile-title"><span id="playerName">player_1</span> <span class="grad">· Статистика</span></h1>
+          <p class="profile-sub" id="playerStatus">Локальный профиль (демо-данные без БД)</p>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <a href="game.html?category=films" class="btn btn--main">▶ Быстрый раунд</a>
+        <a href="index.html#categories" class="btn btn--ghost">Выбрать категорию</a>
+      </div>
+    </section>
+
+    <!-- Ключевые метрики -->
+    <section class="kpi-grid" aria-label="Сводка результатов">
+      <article class="kpi-card">
+        <span>Абсолютный рекорд</span>
+        <strong id="bestTotal">30</strong>
+        <small>лучшая серия подряд</small>
+      </article>
+      <article class="kpi-card">
+        <span>Сыграно раундов</span>
+        <strong id="gamesPlayed">18</strong>
+        <small>всего попыток</small>
+      </article>
+      <article class="kpi-card">
+        <span>Точность выбора</span>
+        <strong id="accuracyRate">68%</strong>
+        <small>верных ответов из всех</small>
+      </article>
+    </section>
+
+    <!-- Карточки рекордов по 5 категориям -->
+    <section class="section profile-section" id="records">
+      <h2>Рекорды по категориям</h2>
+      <p class="section__sub">Нажми на категорию, чтобы сразу начать раунд.</p>
+
+      <div class="cat-records">
+        <a class="rec-card" href="game.html?category=films" style="--clr:#7c5cff">
+          <div class="rec-card__top">
+            <span class="rec-card__emoji">🎬</span>
+            <span class="rec-card__badge">Фильмы</span>
+          </div>
+          <strong class="rec-card__score" data-cat="films">30</strong>
+          <span class="rec-card__hint">личный рекорд →</span>
+        </a>
+
+        <a class="rec-card" href="game.html?category=stars" style="--clr:#ff4fa3">
+          <div class="rec-card__top">
+            <span class="rec-card__emoji">⭐</span>
+            <span class="rec-card__badge">Знаменитости</span>
+          </div>
+          <strong class="rec-card__score" data-cat="stars">29</strong>
+          <span class="rec-card__hint">личный рекорд →</span>
+        </a>
+
+        <a class="rec-card" href="game.html?category=country" style="--clr:#22d3ee">
+          <div class="rec-card__top">
+            <span class="rec-card__emoji">🌍</span>
+            <span class="rec-card__badge">Страны</span>
+          </div>
+          <strong class="rec-card__score" data-cat="country">28</strong>
+          <span class="rec-card__hint">личный рекорд →</span>
+        </a>
+
+        <a class="rec-card" href="game.html?category=games" style="--clr:#34d399">
+          <div class="rec-card__top">
+            <span class="rec-card__emoji">🎮</span>
+            <span class="rec-card__badge">Видеоигры</span>
+          </div>
+          <strong class="rec-card__score" data-cat="games">27</strong>
+          <span class="rec-card__hint">личный рекорд →</span>
+        </a>
+
+        <a class="rec-card" href="game.html?category=music" style="--clr:#fbbf24">
+          <div class="rec-card__top">
+            <span class="rec-card__emoji">🎵</span>
+            <span class="rec-card__badge">Музыка</span>
+          </div>
+          <strong class="rec-card__score" data-cat="music">26</strong>
+          <span class="rec-card__hint">личный рекорд →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Таблица рекордов по категориям + настройки профиля -->
+    <div class="profile-split">
+      <section class="section profile-section" id="records-table">
+        <h2>Сводка рекордов</h2>
+        <p class="section__sub">Лучший результат и позиция игрока в каждой категории.</p>
+
+        <div class="history-box">
+          <table>
+            <thead>
+              <tr>
+                <th>Категория</th>
+                <th>Рекорд</th>
+                <th>Место в топе</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>🎬 Фильмы</td>
+                <td><b data-table-cat="films">30</b></td>
+                <td><span class="status status--ok">🥇 1 место</span></td>
+              </tr>
+              <tr>
+                <td>⭐ Знаменитости</td>
+                <td><b data-table-cat="stars">29</b></td>
+                <td><span class="status status--ok">🥇 1 место</span></td>
+              </tr>
+              <tr>
+                <td>🌍 Страны</td>
+                <td><b data-table-cat="country">28</b></td>
+                <td><span class="status status--ok">🥇 1 место</span></td>
+              </tr>
+              <tr>
+                <td>🎮 Видеоигры</td>
+                <td><b data-table-cat="games">27</b></td>
+                <td><span class="status status--ok">🥇 1 место</span></td>
+              </tr>
+              <tr>
+                <td>🎵 Музыка</td>
+                <td><b data-table-cat="music">26</b></td>
+                <td><span class="status status--ok">🥇 1 место</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section profile-section" id="settings">
+        <h2>Настройки игрока</h2>
+        <p class="section__sub">Изменения сохраняются в <code>localStorage</code> браузера.</p>
+
+        <form class="settings-card" id="profileForm">
+          <label>
+            Отображаемый ник
+            <input type="text" id="nickInput" maxlength="20" value="player_1" required>
+          </label>
+
+          <label>
+            Эмодзи-аватар
+            <select id="avatarSelect">
+              <option value="⚡" selected>⚡ Молния</option>
+              <option value="🦊">🦊 Лис</option>
+              <option value="🎯">🎯 Мишень</option>
+              <option value="🚀">🚀 Ракета</option>
+              <option value="👑">👑 Корона</option>
+            </select>
+          </label>
+
+          <label>
+            Акцент профиля
+            <select id="colorSelect">
+              <option value="#7c5cff" selected>Фиолетовый</option>
+              <option value="#22d3ee">Голубой</option>
+              <option value="#ff4fa3">Розовый</option>
+              <option value="#34d399">Изумрудный</option>
+            </select>
+          </label>
+
+          <div class="settings-btns">
+            <button type="submit" class="btn btn--main btn--small">Сохранить</button>
+            <button type="button" id="resetDemoBtn" class="btn btn--ghost btn--small">Сбросить демо</button>
+          </div>
+          <p class="form-feedback" id="saveFeedback" aria-live="polite"></p>
+        </form>
+      </section>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    © 2026 «Выше или ниже» · Учебный проект · Команда ПО-2408
+  </footer>
+
+  <script>
+    const STORAGE_KEY = 'higherLowerProfileV1';
+    const defaultState = {
+      nick: 'player_1',
+      avatar: '⚡',
+      accent: '#7c5cff',
+      records: { films: 30, stars: 29, country: 28, games: 27, music: 26 },
+      gamesPlayed: 18,
+      accuracy: '68%'
+    };
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? { ...defaultState, ...JSON.parse(raw), records: { ...defaultState.records, ...(JSON.parse(raw).records || {}) } } : { ...defaultState };
+      } catch (e) {
+        return { ...defaultState };
+      }
+    }
+
+    function renderProfile(state) {
+      document.getElementById('playerName').textContent = state.nick;
+      document.getElementById('nickInput').value = state.nick;
+      document.getElementById('avatarBadge').textContent = state.avatar;
+      document.getElementById('avatarBadge').style.setProperty('--clr', state.accent);
+      document.getElementById('avatarSelect').value = state.avatar;
+      document.getElementById('colorSelect').value = state.accent;
+
+      const headerUser = document.querySelector('.auth-box .user');
+      if (headerUser) {
+        headerUser.innerHTML = '<i>' + state.nick.slice(0, 2).toUpperCase() + '</i> ' + state.nick;
+      }
+
+      const vals = Object.values(state.records);
+      document.getElementById('bestTotal').textContent = Math.max(...vals);
+      document.getElementById('gamesPlayed').textContent = state.gamesPlayed;
+      document.getElementById('accuracyRate').textContent = state.accuracy;
+
+      document.querySelectorAll('.rec-card__score').forEach(function (el) {
+        const key = el.dataset.cat;
+        if (key && state.records[key] !== undefined) {
+          el.textContent = state.records[key];
+        }
+      });
+
+      document.querySelectorAll('[data-table-cat]').forEach(function (el) {
+        const key = el.dataset.tableCat;
+        if (key && state.records[key] !== undefined) {
+          el.textContent = state.records[key];
+        }
+      });
+    }
+
+    let state = loadState();
+    renderProfile(state);
+
+    document.getElementById('profileForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const nick = document.getElementById('nickInput').value.trim() || 'player_1';
+      state = {
+        ...state,
+        nick: nick,
+        avatar: document.getElementById('avatarSelect').value,
+        accent: document.getElementById('colorSelect').value
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      renderProfile(state);
+      document.getElementById('saveFeedback').textContent = 'Настройки сохранены локально.';
+    });
+
+    document.getElementById('resetDemoBtn').addEventListener('click', function () {
+      localStorage.removeItem(STORAGE_KEY);
+      state = { ...defaultState };
+      renderProfile(state);
+      document.getElementById('saveFeedback').textContent = 'Возвращены исходные демо-значения.';
+    });
+  </script>
+</body>
+</html>
